@@ -1,0 +1,212 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg-dark: #0a1628;
+  --bg-darker: #050d1a;
+  --card-bg: #0f1e36;
+  --card-border: rgba(255,255,255,0.06);
+  --text: #f4f7fb;
+  --text-muted: #8a97ad;
+  --eyebrow: #fbbc04;
+  --accent: #fbbc04;
+  --accent-hover: #ffd33d;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-darker);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+/* ============ LAYOUT ============ */
+.rate-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  position: relative;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(26,115,232,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(139,92,246,0.06) 0%, transparent 50%),
+    var(--bg-darker);
+  overflow: hidden;
+}
+
+/* Ambient glows */
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+  opacity: 0.5;
+}
+.glow-1 {
+  width: 500px;
+  height: 500px;
+  background: rgba(251, 188, 4, 0.08);
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.glow-2 {
+  width: 400px;
+  height: 400px;
+  background: rgba(26, 115, 232, 0.1);
+  bottom: -100px;
+  right: -100px;
+}
+
+/* ============ CARD ============ */
+.rate-card {
+  position: relative;
+  max-width: 560px;
+  width: 100%;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.02),
+    0 25px 80px rgba(0,0,0,0.5);
+  animation: cardAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+}
+.eyebrow {
+  color: var(--eyebrow);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+}
+
+.rate-card h1 {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+
+.rate-description {
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+
+/* ============ EXPORTS PILL ============ */
+.exports-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(251, 188, 4, 0.08);
+  border: 1px solid rgba(251, 188, 4, 0.2);
+  color: #fde68a;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+.exports-pill strong { color: var(--accent); font-weight: 700; }
+.sparkle {
+  display: inline-block;
+  animation: sparkle 2s ease-in-out infinite;
+}
+@keyframes sparkle {
+  0%, 100% { transform: scale(1) rotate(0); }
+  50% { transform: scale(1.2) rotate(15deg); }
+}
+
+/* ============ BUTTONS ============ */
+.rate-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.btn-rate,
+.btn-dismiss {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 22px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.btn-rate {
+  background: var(--accent);
+  color: #1a1a1a;
+  box-shadow: 0 4px 14px rgba(251, 188, 4, 0.3);
+}
+.btn-rate:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(251, 188, 4, 0.4);
+}
+.btn-rate:active { transform: translateY(0); }
+.btn-rate .star { font-size: 16px; }
+
+.btn-dismiss {
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.btn-dismiss:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.15);
+}
+
+.rate-footnote {
+  color: var(--text-muted);
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+/* ============ THANK YOU STATE ============ */
+.rate-card.thanks h1 {
+  background: linear-gradient(135deg, var(--accent), #ffd33d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 600px) {
+  .rate-card { padding: 30px 24px; }
+  .rate-card h1 { font-size: 26px; }
+  .rate-actions { flex-direction: column; }
+  .btn-rate, .btn-dismiss { width: 100%; justify-content: center; }
+}
